@@ -36,6 +36,10 @@ class Evento
     #[ORM\Column(length: 255)]
     private ?string $idioma = null;
 
+    #[ORM\ManyToOne(inversedBy: 'eventos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Disertante $disertante = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +126,18 @@ class Evento
     public function setIdioma(string $idioma): static
     {
         $this->idioma = $idioma;
+
+        return $this;
+    }
+
+    public function getDisertante(): ?Disertante
+    {
+        return $this->disertante;
+    }
+
+    public function setDisertante(?Disertante $disertante): static
+    {
+        $this->disertante = $disertante;
 
         return $this;
     }

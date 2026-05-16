@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DisertanteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,6 +29,9 @@ class Disertante
     private ?string $telefono = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $calles = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $url = null;
 
     #[ORM\Column(length: 255)]
@@ -37,6 +42,17 @@ class Disertante
 
     #[ORM\Column(length: 255)]
     private ?string $linkedin = null;
+
+    /**
+     * @var Collection<int, Evento>
+     */
+    #[ORM\OneToMany(targetEntity: Evento::class, mappedBy: 'disertante')]
+    private Collection $eventos;
+
+    public function __construct()
+    {
+        $this->eventos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +107,18 @@ class Disertante
         return $this;
     }
 
+    public function getDireccion(): ?string
+    {
+        return $this->calles;
+    }
+
+    public function setDireccion(string $calles): static
+    {
+        $this->calles = $calles;
+
+        return $this;
+    }
+
     public function getUrl(): ?string
     {
         return $this->url;
@@ -135,6 +163,36 @@ class Disertante
     public function setLinkedin(string $linkedin): static
     {
         $this->linkedin = $linkedin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evento>
+     */
+    public function getEventos(): Collection
+    {
+        return $this->eventos;
+    }
+
+    public function addEvento(Evento $evento): static
+    {
+        if (!$this->eventos->contains($evento)) {
+            $this->eventos->add($evento);
+            $evento->setDisertante($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvento(Evento $evento): static
+    {
+        if ($this->eventos->removeElement($evento)) {
+            // set the owning side to null (unless already changed)
+            if ($evento->getDisertante() === $this) {
+                $evento->setDisertante(null);
+            }
+        }
 
         return $this;
     }
