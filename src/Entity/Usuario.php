@@ -41,7 +41,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Evento>
      */
-    #[ORM\ManyToMany(targetEntity: Evento::class)]
+    #[ORM\ManyToMany(targetEntity: Evento::class, inversedBy: 'usuarios')]
     private Collection $Evento;
 
     public function __construct()

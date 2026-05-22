@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Common\Util;
 use App\Repository\EventoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -39,6 +41,17 @@ class Evento
     #[ORM\ManyToOne(inversedBy: 'eventos')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Disertante $disertante = null;
+
+    /**
+     * @var Collection<int, Usuario>
+     */
+    #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'Evento')]
+    private Collection $usuarios;
+
+    public function __construct()
+    {
+        $this->usuarios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +151,33 @@ class Evento
     public function setDisertante(?Disertante $disertante): static
     {
         $this->disertante = $disertante;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Usuario>
+     */
+    public function getUsuarios(): Collection
+    {
+        return $this->usuarios;
+    }
+
+    public function addUsuario(Usuario $usuario): static
+    {
+        if (!$this->usuarios->contains($usuario)) {
+            $this->usuarios->add($usuario);
+            $usuario->addEvento($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsuario(Usuario $usuario): static
+    {
+        if ($this->usuarios->removeElement($usuario)) {
+            $usuario->removeEvento($this);
+        }
 
         return $this;
     }
