@@ -196,4 +196,14 @@ class Disertante
 
         return $this;
     }
+
+    public function getNombreCompleto(): string
+    {
+        return $this->nombre.' '.$this->apellido;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getNombreCompleto();
+    }
 }

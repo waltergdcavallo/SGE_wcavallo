@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\EventoRepository;
 
 final class EventoController extends AbstractController
 {
@@ -21,7 +22,7 @@ final class EventoController extends AbstractController
     {
         $eventos = $repository->findEventosAlfabeticamente();
 
-        return $this->render('evento/evento/eventos.html.twig', [
+        return $this->render('evento/eventos.html.twig', [
             'eventos'=>$eventos
             ]);
     }
@@ -32,12 +33,18 @@ final class EventoController extends AbstractController
         EventoRepository $repository
     ): Response
     {
-        $eventos = $repository->findEventosAlfabeticamente();
+        $evento = $repository->findOneBy([
+            'slug'=>$slug
+        ]);
 
-        return $this->render('evento/evento/eventos.html.twig', [
-            'eventos'=>$eventos
-            ]);
+        if (!$evento) {
+            throw $this->createNotFoundException(
+                'No existe el evento solicitado'
+            );
+        }
+
+        return $this->render('evento/evento.html.twig', [
+            'evento'=>$evento
+       ]);
     }
-
-
 }
