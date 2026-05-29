@@ -187,7 +187,7 @@ class Evento
         $horaFinal = clone $this->hora;
 
         return $horaFinal->add(
-            new \DateInterval('PT', $this->duracion.'M')
+            new \DateInterval('PT'.$this->duracion.'M')
         );
     }
 

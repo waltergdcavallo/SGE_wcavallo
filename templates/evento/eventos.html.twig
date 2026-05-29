@@ -10,17 +10,18 @@
 
     <div>
 
+        <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
+            {{ evento.titulo }}
+        </a>
+
         <strong>
-            {{evento.hora|date('H:i')}}
+            {{ evento.hora|date('H:i')}}
             -
-            {{evento.horaFinalizacion|date('H:i')}}
+            {{ evento.horaFinalizacion|date('H:i')}}
         </strong>
 
         <br>
-
-        <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
-        </a>
-
+        
         <p>{{ evento.descripcion}}</p>
     </div>
     {% endfor %}

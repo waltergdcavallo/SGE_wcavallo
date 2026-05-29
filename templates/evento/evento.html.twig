@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EventoController!{% endblock %}
-
 {% block body %}
 
 <h1>{{ evento.titulo }}</h1>
@@ -17,7 +15,7 @@
     <strong>Hora:</strong>
     {{ evento.hora|date('H:i') }}
     -
-    {# evento.horaFinalizacion|date('H:i') falta esto #} 
+    {{ evento.horaFinalizacion|date('H:i')}} 
 </div>
 
 <div>

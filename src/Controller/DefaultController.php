@@ -5,14 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Doctrine\ORM\EntityManagerInterface;                                         //NUEVA RUTA
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evento;
 
 
 class DefaultController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager                            //CONSTRUCTOR NUEVO
+        private EntityManagerInterface $entityManager
     ){}
 
     #[Route(

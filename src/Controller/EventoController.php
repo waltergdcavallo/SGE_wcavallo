@@ -9,13 +9,13 @@ use App\Repository\EventoRepository;
 
 final class EventoController extends AbstractController
 {
-    #[Route('/evento', name: 'app_evento')]
+    /* #[Route('/evento', name: 'app_evento')]
     public function index(): Response
     {
         return $this->render('evento/index.html.twig', [
             'controller_name' => 'EventoController',
         ]);
-    }
+    } */
 
     #[Route('/eventos', name: 'app_eventos')]
     public function eventos(EventoRepository $repository): Response
@@ -27,7 +27,7 @@ final class EventoController extends AbstractController
             ]);
     }
 
-    #[Route('/eventos/{slug}', name: 'evento_detalle')]                     //falta esto
+    #[Route('/eventos/{slug}', name: 'evento_detalle')]
     public function evento(
         string $slug,
         EventoRepository $repository
