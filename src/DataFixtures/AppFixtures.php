@@ -262,6 +262,9 @@ class AppFixtures extends Fixture
 
             $evento->setIdioma('es');
 
+            $estado=["Activo","Cancelado","Finalizado"];
+            $evento->setEstado($estado[array_rand($estado)]);
+
             $evento->setDisertante(
                 $this->getReference(
                     $datosEvento['disertante'],

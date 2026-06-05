@@ -48,6 +48,9 @@ class Evento
     #[ORM\ManyToMany(targetEntity: Usuario::class, mappedBy: 'Evento')]
     private Collection $usuarios;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Estado = null;
+
     public function __construct()
     {
         $this->usuarios = new ArrayCollection();
@@ -194,5 +197,17 @@ class Evento
     public function __toString(): string
     {
         return $this->titulo;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->Estado;
+    }
+
+    public function setEstado(string $Estado): static
+    {
+        $this->Estado = $Estado;
+
+        return $this;
     }
 }
