@@ -62,7 +62,10 @@
                     </a>
 
 
-                    <a href="#"
+                    <a href="{{ path(
+                            'admin_evento_borrar',
+                            {id: evento.id}
+                        ) }}"
                        class="btn btn-danger btn-sm">
                         Borrar
                     </a>
