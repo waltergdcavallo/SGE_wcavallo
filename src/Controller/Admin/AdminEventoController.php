@@ -7,20 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
-
-/* final class AdminEventoController extends AbstractController
-{
-    #[Route('/admin/admin/evento', name: 'app_admin_admin_evento')]
-    public function index(): Response
-    {
-        return $this->render('admin/admin_evento/index.html.twig', [
-            'controller_name' => 'Admin/AdminEventoController',
-        ]);
-    }
-} */
+use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/admin/evento')]
-class AdminEventoController extends AbstractController
+class AdminEventoController extends AbstractAdminBaseController
 {
     #[Route(
         '/listar',
@@ -89,11 +79,15 @@ class AdminEventoController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->render(
-            'admin/evento/borrar.html.twig',
-            [
-                'evento' => $evento
-            ]
+        $this->addSuccessMessage(
+            sprintf(
+                "El evento '%s' se ha borrado correctamente.",
+                $evento->getTitulo()
+            )
+        );
+
+        return $this->redirectToRoute(
+            'admin_evento_listar'
         );
     }
 }

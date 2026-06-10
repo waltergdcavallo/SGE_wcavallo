@@ -6,93 +6,115 @@
 
 {% block body %}
 
-<div class="container mt-4">
+{% for mensaje in app.flashes('success') %}
 
-    <h1>Gestión de Eventos</h1>
+    <div class="alert alert-success">
+        {{ mensaje }}
+    </div>
+{% endfor %}
 
-    <table class="table table-bordered table-striped">
 
-        <thead>
-        <tr>
-            <th>Fecha/Hora</th>
-            <th>Título</th>
-            <th>Idioma</th>
-            <th>Inscriptos</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
+{% for mensaje in app.flashes('info') %}
 
-        <tbody>
+    <div class="alert alert-info">
+        {{ mensaje }}
+    </div>
+{% endfor %}
 
-        {% for evento in eventos %}
+{% for mensaje in app.flashes('warning') %}
 
+    <div class="alert alert-warning">
+        {{ mensaje }}
+    </div>
+{% endfor %}
+
+    <div class="container mt-4">
+
+        <h1>Gestión de Eventos</h1>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
             <tr>
-
-                <td>
-                    {{ evento.fecha|date('d/m/Y') }}
-                    {{ evento.hora|date('H:i') }}
-                </td>
-
-                <td>
-                    {{ evento.titulo }}
-                </td>
-
-                <td>
-                    {{ evento.idioma }}
-                </td>
-
-                <td>
-                    {{ evento.usuarios|length }}
-                </td>
-
-                <td>
-                    {{ evento.estado }}
-                </td>
-
-                <td>
-                    <a
-                        href="{{ path(
-                            'admin_evento_inscriptos',
-                            {id: evento.id}
-                        ) }}"
-                        class="btn btn-info btn-sm"
-                    >
-                        Inscriptos
-                    </a>
-
-
-                    <a href="{{ path(
-                            'admin_evento_borrar',
-                            {id: evento.id}
-                        ) }}"
-                       class="btn btn-danger btn-sm">
-                        Borrar
-                    </a>
-
-                </td>
-
+                <th>Fecha/Hora</th>
+                <th>Título</th>
+                <th>Idioma</th>
+                <th>Inscriptos</th>
+                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
+            </thead>
 
-        {% else %}
+            <tbody>
 
-            <tr>
-                <td colspan="5">
-                    No existe ningún evento.
-                </td>
-            </tr>
+            {% for evento in eventos %}
 
-        {% endfor %}
+                <tr>
 
-        </tbody>
+                    <td>
+                        {{ evento.fecha|date('d/m/Y') }}
+                        {{ evento.hora|date('H:i') }}
+                    </td>
 
-    </table>
+                    <td>
+                        {{ evento.titulo }}
+                    </td>
 
-    <a href="#"
-       class="btn btn-success">
-        Nuevo Evento
-    </a>
+                    <td>
+                        {{ evento.idioma }}
+                    </td>
 
-</div>
+                    <td>
+                        {{ evento.usuarios|length }}
+                    </td>
+
+                    <td>
+                        {{ evento.estado }}
+                    </td>
+
+                    <td>
+                        <a
+                            href="{{ path(
+                                'admin_evento_inscriptos',
+                                {id: evento.id}
+                            ) }}"
+                            class="btn btn-info btn-sm"
+                        >
+                            Inscriptos
+                        </a>
+
+
+                        <a href="{{ path(
+                                'admin_evento_borrar',
+                                {id: evento.id}
+                            ) }}"
+                           class="btn btn-danger btn-sm">
+                            Borrar
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% else %}
+
+                <tr>
+                    <td colspan="5">
+                        No existe ningún evento.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <a href="#"
+           class="btn btn-success">
+            Nuevo Evento
+        </a>
+
+    </div>
 
 {% endblock %}
