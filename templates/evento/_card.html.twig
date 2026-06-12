@@ -1,0 +1,8 @@
+<article class="evento-card">
+    <li>
+        <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
+            <h3>{{ evento.titulo }}</h3>
+        </a>
+        <p>{{ evento.descripcion|slice(0,200) }}</p>
+    </li>
+</article>

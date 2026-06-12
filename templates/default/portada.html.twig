@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'frontend/layout.html.twig' %}
+
 
 {% block body %}
 
@@ -16,13 +17,7 @@
         <div class="col">
             <ul>
                 {% for evento in eventosCol1 %}
-                    <li>
-                        <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
-                            {{ evento.titulo }}
-                        </a>
-
-                        <p>{{ evento.descripcion }}</p>
-                    </li>
+                    {% include 'evento/_card.html.twig' %}
                 {% else %}
                     <li>No hay eventos</li>
                 {% endfor %}
@@ -32,13 +27,7 @@
         <div class="col">
             <ul>
                 {% for evento in eventosCol2 %}
-                    <li>
-                        <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
-                            {{ evento.titulo }}
-                        </a>
-
-                        <p>{{ evento.descripcion }}</p>
-                    </li>
+                    {% include 'evento/_card.html.twig' %}
                 {% else %}
                     <li>No hay eventos</li>
                 {% endfor %}

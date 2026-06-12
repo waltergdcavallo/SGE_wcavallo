@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'frontend/layout.html.twig' %}
 
-{% block title %}Hello EventoController!{% endblock %}
+{% block title %}Eventos{% endblock %}
 
 {% block body %}
 
@@ -9,11 +9,6 @@
     {% for evento in eventos %}
 
     <div>
-
-        <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
-            {{ evento.titulo }}
-        </a>
-
         <strong>
             {{ evento.hora|date('H:i')}}
             -
@@ -21,8 +16,8 @@
         </strong>
 
         <br>
-        
-        <p>{{ evento.descripcion}}</p>
+
+        {% include 'evento/_card.html.twig'%}
     </div>
     {% endfor %}
 {% endblock %}
