@@ -6,90 +6,88 @@
 
 {% block body %}
 
-<div class="container mt-4">
+    <div class="container mt-4">
 
-    <h1>
-        Inscriptos al Evento
-    </h1>
+        <h1>
+            Inscriptos al Evento
+        </h1>
 
-    <h4>
-        {{ evento.titulo }}
-    </h4>
+        <h4>
+            {{ evento.titulo }}
+        </h4>
 
-    <h4>
-    Idioma:
-        {{ evento.idioma }}
-    </h4>
+        <h4>
+        Idioma:
+            {{ evento.idioma }}
+        </h4>
 
-    <h5>
-        {{ evento.usuarios|length }}
-    </h5>
+        <h5>
+            {{ evento.usuarios|length }}
+        </h5>
 
-    <hr>
+        <hr>
+        <table class="table table-bordered table-striped">
 
-    <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
 
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-        </tr>
-        </thead>
+            <tbody>
 
-        <tbody>
+                {% for usuario in evento.usuarios %}
+    
+                    <tr>
+                        <td>
+                            {{ loop.index }}
+                        </td>
+    
+                        <td>
+                            {{ usuario.dni }}
+                        </td>
+    
+                        <td>
+                            {{ usuario.nombre }}
+                            {{ usuario.apellido }}
+                        </td>
+    
+                        <td>
+                            {{ usuario.telefono }}
+                        </td>
+    
+                        <td>
+                            {{ usuario.email }}
+                        </td>
+                    </tr>
 
-        {% for usuario in evento.usuarios %}
+                {% else %}
+    
+                    <tr>
+                        <td colspan="5">
+                            No hay usuarios inscriptos.
+                        </td>
+                    </tr>
 
-            <tr>
+                {% endfor %}
 
-                <td>
-                    {{ loop.index }}
-                </td>
+            </tbody>
 
-                <td>
-                    {{ usuario.dni }}
-                </td>
+        </table>
 
-                <td>
-                    {{ usuario.nombre }}
-                    {{ usuario.apellido }}
-                </td>
+        <a
+            href="{{ path(
+                'admin_evento_listar'
+                ) }}"
+                class="btn btn-info btn-sm"
+                >
+                Atras
+        </a>
 
-                <td>
-                    {{ usuario.telefono }}
-                </td>
-
-                <td>
-                    {{ usuario.email }}
-                </td>
-
-            </tr>
-
-        {% else %}
-
-            <tr>
-                <td colspan="5">
-                    No hay usuarios inscriptos.
-                </td>
-            </tr>
-
-        {% endfor %}
-
-        </tbody>
-
-    </table>
-    <a
-        href="{{ path(
-            'admin_evento_listar'
-            ) }}"
-            class="btn btn-info btn-sm"
-            >
-            Atras
-    </a>
-
-</div>
-
+    </div>
+    
 {% endblock %}

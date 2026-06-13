@@ -15,19 +15,18 @@ class DefaultController extends AbstractController
         private EntityManagerInterface $entityManager
     ){}
 
+    
     #[Route(
         '/sitio/{pagina}',
          name: 'app_estatica',
-         defaults:['pagina'=>'patrocinadores'],
-         requirements: [
-            'pagina'=>'patrocinadoes|privacidad|condiciones|licencia'
-         ]
+         defaults: ['pagina'=>'patrocinadores'],
+         requirements: ['pagina'=>'patrocinadoes|privacidad|condiciones|licencia']
     )]
-
     public function estatica(string $pagina): Response
     {
         return $this->render('estatica/'.$pagina.'.html.twig');
     }
+
 
     #[Route('/', name: 'portada')]
     public function portada(): Response

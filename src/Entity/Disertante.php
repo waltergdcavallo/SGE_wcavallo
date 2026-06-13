@@ -188,7 +188,6 @@ class Disertante
     public function removeEvento(Evento $evento): static
     {
         if ($this->eventos->removeElement($evento)) {
-            // set the owning side to null (unless already changed)
             if ($evento->getDisertante() === $this) {
                 $evento->setDisertante(null);
             }

@@ -8,16 +8,19 @@
 
     {% for evento in eventos %}
 
-    <div>
-        <strong>
-            {{ evento.hora|date('H:i')}}
-            -
-            {{ evento.horaFinalizacion|date('H:i')}}
-        </strong>
+        <div>
+            <strong>
+                {{ evento.hora|date('H:i')}}
+                -
+                {{ evento.horaFinalizacion|date('H:i')}}
+            </strong>
 
-        <br>
+            <br>
 
-        {% include 'evento/_card.html.twig'%}
-    </div>
+            {% include 'evento/_card.html.twig'%}
+
+        </div>
+
     {% endfor %}
+    
 {% endblock %}

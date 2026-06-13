@@ -15,8 +15,7 @@ final class DisertanteController extends AbstractController
         DisertanteRepository $repository
     ): Response
     {
-        $disertantes = $repository
-            ->findDisertantesAlfabeticamente();
+        $disertantes = $repository->findDisertantesAlfabeticamente();
 
         return $this->render(
             'disertante/disertantes.html.twig',
@@ -26,6 +25,7 @@ final class DisertanteController extends AbstractController
         );
     }
 
+    
     #[Route(
         '/disertante/{id}',
         name: 'app_disertante_detalle'

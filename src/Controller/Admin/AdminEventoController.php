@@ -30,12 +30,13 @@ class AdminEventoController extends AbstractAdminBaseController
         );
     }
 
+
     #[Route(
-    '/inscriptos/{id}',
-    name: 'admin_evento_inscriptos',
-    requirements: ['id' => '\d+']
+        '/inscriptos/{id}',
+        name: 'admin_evento_inscriptos',
+        requirements: ['id' => '\d+']
     )]
-        public function inscriptos(
+    public function inscriptos(
         int $id,
         EventoRepository $eventoRepository
     ): Response
@@ -56,6 +57,7 @@ class AdminEventoController extends AbstractAdminBaseController
         );
     }
 
+    
     #[Route(
         '/borrar/{id}',
         name: 'admin_evento_borrar',

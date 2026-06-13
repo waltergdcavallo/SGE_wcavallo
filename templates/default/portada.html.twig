@@ -3,36 +3,41 @@
 
 {% block body %}
 
-{% for mensaje in app.flashes('info') %}
-    <div class="alert alert-info">
-        {{ mensaje }}
-    </div>     
-{% endfor %}
+    {% for mensaje in app.flashes('info') %}
 
+        <div class="alert alert-info">
+            {{ mensaje }}
+        </div>     
 
-<h1>Symfony 7.4 - Eventos</h1>
+    {% endfor %}
 
-    <div class="row">
+    <h1>Symfony 7.4 - Eventos</h1>
 
-        <div class="col">
-            <ul>
-                {% for evento in eventosCol1 %}
-                    {% include 'evento/_card.html.twig' %}
-                {% else %}
-                    <li>No hay eventos</li>
-                {% endfor %}
-            </ul>
+        <div class="row">
+
+            <div class="col">
+
+                <ul>
+                    {% for evento in eventosCol1 %}
+                        {% include 'evento/_card.html.twig' %}
+                    {% else %}
+                        <li>No hay eventos</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+            <div class="col">
+
+                <ul>
+                    {% for evento in eventosCol2 %}
+                        {% include 'evento/_card.html.twig' %}
+                    {% else %}
+                        <li>No hay eventos</li>
+                    {% endfor %}
+                </ul>
+                
+            </div>
         </div>
-
-        <div class="col">
-            <ul>
-                {% for evento in eventosCol2 %}
-                    {% include 'evento/_card.html.twig' %}
-                {% else %}
-                    <li>No hay eventos</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
 
 {% endblock %}

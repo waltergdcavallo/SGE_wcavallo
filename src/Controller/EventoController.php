@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class EventoController extends AbstractBaseController
 {
-
     #[Route('/eventos', name: 'app_eventos')]
     public function eventos(EventoRepository $repository): Response
     {
@@ -18,8 +17,9 @@ final class EventoController extends AbstractBaseController
 
         return $this->render('evento/eventos.html.twig', [
             'eventos'=>$eventos
-            ]);
+        ]);
     }
+
 
     #[Route('/evento/{slug}', name: 'evento_detalle')]
     public function evento(
@@ -40,12 +40,12 @@ final class EventoController extends AbstractBaseController
         }
 
         $this->addInfoMessage(
-                sprintf(
-                    "Has leído sobre el evento '%s' a las %s.",
-                    $evento->getTitulo(),
-                    date('H:i:s')
-                )
-            );
+            sprintf(
+                "Has leído sobre el evento '%s' a las %s.",
+                $evento->getTitulo(),
+                date('H:i:s')
+            )
+        );
 
         return $this->render('evento/evento.html.twig', [
             'evento'=>$evento
