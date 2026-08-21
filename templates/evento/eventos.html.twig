@@ -2,11 +2,23 @@
 
 {% block title %}Eventos{% endblock %}
 
-{% block body %}
-
-    <h1>Eventos</h1>
+{% block contenido %}
 
     {% for evento in eventos %}
+
+        <h3>{{ evento.titulo|title }}</h3>
+
+        <div>
+            {{ evento.descripcion|slice(0,150)}}
+        </div>
+
+        <div>
+            {{ evento.biografia|raw}}
+        </div>
+
+        <div>
+            {{ evento.fecha|date('d/m/Y')}}
+        </div>
 
         <div>
             <strong>
