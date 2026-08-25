@@ -5,4 +5,8 @@
     <h2>Próximos eventos</h2>
 
     {% for evento in eventos %}
-        {# seguir esto#}
+        {% include 'evento/card_.html.twig' with {
+            evento: evento
+        } %}
+    {% endfor %}
+{% endblock %}
