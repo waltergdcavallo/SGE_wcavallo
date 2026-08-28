@@ -2,7 +2,7 @@
     <li>
         <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}">
             <h3>
-                {{ evento.titulo }}
+                {{ evento.titulo|title }}
             </h3>
         </a>
 

@@ -1,0 +1,12 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block contenido %}
+
+    <h2>Próximos eventos</h2>
+
+    {% for evento in eventos %}
+        {% include 'evento/card_.html.twig' with {
+            evento: evento
+        } %}
+    {% endfor %}
+{% endblock %}

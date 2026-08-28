@@ -9,22 +9,18 @@
         <h3>{{ evento.titulo|title }}</h3>
 
         <div>
-            {{ evento.descripcion|slice(0,150)}}
+            {{ evento.descripcion|slice(0,150) }}
         </div>
 
         <div>
-            {{ evento.biografia|raw}}
-        </div>
-
-        <div>
-            {{ evento.fecha|date('d/m/Y')}}
+            {{ evento.fecha|date('d/m/Y') }}
         </div>
 
         <div>
             <strong>
-                {{ evento.hora|date('H:i')}}
+                {{ evento.hora|date('H:i') }}
                 -
-                {{ evento.horaFinalizacion|date('H:i')}}
+                {{ evento.horaFinalizacion|date('H:i') }}
             </strong>
 
             <br>
