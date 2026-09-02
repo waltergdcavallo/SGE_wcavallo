@@ -25,7 +25,17 @@
         </header>
 
         <main>
-            {% block body %}{% endblock %}
+            {% block body %}
+                {% for message in app.flashes('success') %}
+                    <div class="container mt-3">
+                        <div class="alert alert-success"
+                             role="alert"
+                        >
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endblock %}
         </main>
 
         <footer>
