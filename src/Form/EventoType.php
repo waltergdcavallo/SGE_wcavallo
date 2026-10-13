@@ -15,43 +15,43 @@ class EventoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titulo', [
+            ->add('titulo', null,[
                 'label'=>'Nombre del evento',
                 'attr'=>[
                     'placeholder'=>'Ingrese el nombre del evento',
                 ],
             ])
 
-            ->add('descripcion', [
+            ->add('descripcion', null,[
                 'label'=>'Descripción',
                 'attr'=>[
                     'placeholder'=>'Ingrese una descripción',
                 ],
             ])
 
-            ->add('fecha', [
+            ->add('fecha', null, [
                 'label'=>'Fecha del evento',
             ])
 
-            ->add('hora', [
+            ->add('hora', null, [
                 'label'=>'Hora del evento',
             ])
 
-            ->add('duracion', [
+            ->add('duracion', null, [
                 'label'=>'Duración',
                 'attr'=>[
                     'placeholder'=>'Ingrese la duración',
                 ],
             ])
             
-            ->add('idioma', [
+            ->add('idioma', null, [
                 'label'=>'Idioma del evento',
                 'attr'=>[
                     'placeholder'=>'Ingrese el idioma',
                 ],
             ])
 
-            ->add('Estado', [
+            ->add('estado', null, [
                 'label'=>'Estado del evento',
                 'attr'=>[
                     'placeholder'=>'Ingrese el estado del evento',
@@ -62,10 +62,18 @@ class EventoType extends AbstractType
                 'class' => Disertante::class,
                 'choice_label' => 'nombre',
             ])
+
             ->add('usuarios', EntityType::class, [
                 'class' => Usuario::class,
                 'choice_label' => 'id',
                 'multiple' => true,
+            ])
+
+            ->add('capacidad', null, [
+                'label'=>'Capacidad del evento',
+                'attr'=>[
+                    'placeholder'=>'Ingrese la capacidad del evento',
+                ],
             ])
         ;
     }

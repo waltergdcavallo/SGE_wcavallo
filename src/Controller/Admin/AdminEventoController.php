@@ -49,7 +49,7 @@ class AdminEventoController extends AbstractAdminBaseController
         );
         $form->handleRequest($request);
 
-        if($form->isSubmited() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($evento);
             $entityManager->flush();
 
