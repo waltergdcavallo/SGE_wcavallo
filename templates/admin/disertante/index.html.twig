@@ -1,0 +1,51 @@
+{% extends 'admin/layout-admin.html.twig' %}
+
+{% block title %}Lista de Disertante{% endblock %}
+
+{% block body %}
+    <h1>Disertantes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Biografia</th>
+                <th>Telefono</th>
+                <th>Calles</th>
+                <th>Url</th>
+                <th>Email</th>
+                <th>Twitter</th>
+                <th>Linkedin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for disertante in disertantes %}
+            <tr>
+                <td>{{ disertante.id }}</td>
+                <td>{{ disertante.nombre }}</td>
+                <td>{{ disertante.apellido }}</td>
+                <td>{{ disertante.biografia }}</td>
+                <td>{{ disertante.telefono }}</td>
+                <td>{{ disertante.calles }}</td>
+                <td>{{ disertante.url }}</td>
+                <td>{{ disertante.email }}</td>
+                <td>{{ disertante.twitter }}</td>
+                <td>{{ disertante.linkedin }}</td>
+                <td>
+                    <a href="{{ path('app_admin_disertante_show', {'id': disertante.id}) }}">Ver</a>
+                    <a href="{{ path('app_admin_disertante_edit', {'id': disertante.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">No hay disertantes</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_disertante_new') }}">Crear nuevo disertante</a>
+{% endblock %}
