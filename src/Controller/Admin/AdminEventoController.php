@@ -22,12 +22,11 @@ class AdminEventoController extends AbstractAdminBaseController
         EventoRepository $eventoRepository
     ): Response
     {
-        $eventos = $eventoRepository->findEventosAlfabeticamente();
 
         return $this->render(
             'admin/evento/listar.html.twig',
             [
-                'eventos' => $eventos
+                'eventos' => $eventoRepository->findEventosAlfabeticamente(),
             ]
         );
     }
@@ -60,7 +59,7 @@ class AdminEventoController extends AbstractAdminBaseController
             
 
             return $this->redirectToRoute(
-                'admin_evento_index'
+                'admin_evento_listar'
             );
         }
 

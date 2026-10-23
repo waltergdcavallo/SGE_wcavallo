@@ -6,31 +6,6 @@
 
 {% block body %}
 
-    {% for mensaje in app.flashes('success') %}
-
-        <div class="alert alert-success">
-            {{ mensaje }}
-        </div>
-
-    {% endfor %}
-
-
-    {% for mensaje in app.flashes('info') %}
-
-        <div class="alert alert-info">
-            {{ mensaje }}
-        </div>
-
-    {% endfor %}
-
-    {% for mensaje in app.flashes('warning') %}
-
-        <div class="alert alert-warning">
-            {{ mensaje }}
-        </div>
-
-    {% endfor %}
-
     <div class="container mt-4">
 
         <h1>
@@ -43,6 +18,10 @@
         >
             Nuevo evento
         </a>
+
+    {% block messages %}
+        {{ parent() }}
+    {% endblock %}
 
         <table class="table table-bordered table-striped">
 
@@ -116,7 +95,7 @@
             </tbody>
         </table>
 
-        <a href="#"
+        <a href="{{ path('admin_evento_nuevo') }}"
             class="btn btn-success">
             Nuevo Evento
         </a>

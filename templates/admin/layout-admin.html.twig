@@ -9,5 +9,38 @@
     <nav>
         {#<a href="{{ path('admin_dashboard')}}">Dashboard</a>   no se#}
         <a href="{{ path('admin_evento_listar')}}">Eventos</a>
+        <a href="{{ path('admin_disertante_listar')}}">Disertantes</a>
     </nav>
+{% endblock %}
+
+{% block body %}
+
+    {% block messages %}
+
+        {% for mensaje in app.flashes('success') %}
+        
+            <div class="alert alert-success">
+                {{ mensaje }}
+            </div>
+    
+        {% endfor %}
+    
+    
+        {% for mensaje in app.flashes('info') %}
+    
+            <div class="alert alert-info">
+                {{ mensaje }}
+            </div>
+    
+        {% endfor %}
+    
+        {% for mensaje in app.flashes('warning') %}
+    
+            <div class="alert alert-warning">
+                {{ mensaje }}
+            </div>
+    
+        {% endfor %}
+    {% endblock %}
+    
 {% endblock %}

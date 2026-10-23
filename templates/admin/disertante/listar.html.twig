@@ -1,0 +1,92 @@
+{% extends 'admin/layout-admin.html.twig' %}
+
+{% block title %}Lista de Disertante{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+
+        <h1>
+            Gestión de Disertantes
+        </h1>
+
+    {% block messages %}
+        {{ parent() }}
+    {% endblock %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Biografia</th>
+                <th>Telefono</th>
+                <th>Calles</th>
+                <th>Url</th>
+                <th>Email</th>
+                <th>Twitter</th>
+                <th>Linkedin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for disertante in disertantes %}
+            <tr>
+                <td>
+                    {{ disertante.id }}
+                </td>
+
+                <td>
+                    {{ disertante.nombre }}
+                </td>
+
+                <td>
+                    {{ disertante.apellido }}
+                </td>
+
+                <td>
+                    {{ disertante.biografia }}
+                </td>
+
+                <td>
+                    {{ disertante.telefono }}
+                </td>
+
+                <td>
+                    {{ disertante.calles }}
+                </td>
+
+                <td>
+                    {{ disertante.url }}
+                </td>
+
+                <td>
+                    {{ disertante.email }}
+                </td>
+
+                <td>
+                    {{ disertante.twitter }}
+                </td>
+
+                <td>
+                    {{ disertante.linkedin }}
+                </td>
+
+                <td>
+                    <a href="{{ path('admin_disertante_ver', {'id': disertante.id}) }}" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{{ path('admin_disertante_editar', {'id': disertante.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">
+                    No hay disertantes
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_disertante_nuevo') }}" class="btn btn-success">Nuevo disertante</a>
+{% endblock %}
