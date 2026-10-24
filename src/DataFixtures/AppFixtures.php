@@ -214,27 +214,32 @@ class AppFixtures extends Fixture
             [
                 'titulo' => 'Introducción a Symfony 7.4',
                 'hora' => '09:00:00',
-                'disertante' => 'javierLopez'
+                'disertante' => 'javierLopez',
+                'capacidad' => '20'
             ],
             [
                 'titulo' => 'Ruteo y Controladores',
                 'hora' => '10:30:00',
-                'disertante' => 'ignacioBlanco'
+                'disertante' => 'ignacioBlanco',
+                'capacidad' => '20'
             ],
             [
                 'titulo' => 'Doctrine ORM y Base de Datos',
                 'hora' => '12:00:00',
-                'disertante' => 'marcosRojas'
+                'disertante' => 'marcosRojas',
+                'capacidad' => '20'
             ],
             [
                 'titulo' => 'Twig y Formularios',
                 'hora' => '15:00:00',
-                'disertante' => 'antonelaToledo'
+                'disertante' => 'antonelaToledo',
+                'capacidad' => '20'
             ],
             [
                 'titulo' => 'Seguridad en Symfony 7.4',
                 'hora' => '16:30:00',
-                'disertante' => 'javierLopez'
+                'disertante' => 'javierLopez',
+                'capacidad' => '20'
             ],
         ];
 
@@ -271,6 +276,8 @@ class AppFixtures extends Fixture
                     Disertante::class
                 )
             );
+            $capacidad=$datosEvento['capacidad'];
+            $evento->setCapacidad($capacidad);
 
             $this->addUsuarios(
                 $manager,

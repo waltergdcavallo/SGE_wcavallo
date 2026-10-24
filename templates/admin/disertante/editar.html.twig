@@ -1,0 +1,13 @@
+{% extends 'admin/layout-admin.html.twig' %}
+
+{% block title %}Editar Disertante{% endblock %}
+
+{% block body %}
+    <h1>Editar Disertante</h1>
+
+    {{ include('admin/disertante/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_disertante_listar') }}">Volver a la lista</a>
+
+    {{ include('admin/disertante/_delete_form.html.twig') }}
+{% endblock %}

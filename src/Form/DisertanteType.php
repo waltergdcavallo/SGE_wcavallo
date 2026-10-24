@@ -16,7 +16,7 @@ class DisertanteType extends AbstractType
             ->add('apellido')
             ->add('biografia')
             ->add('telefono')
-            ->add('calles')
+            ->add('direccion')
             ->add('url')
             ->add('email')
             ->add('twitter')

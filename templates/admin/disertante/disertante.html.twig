@@ -28,8 +28,8 @@
                 <td>{{ disertante.telefono }}</td>
             </tr>
             <tr>
-                <th>Calles</th>
-                <td>{{ disertante.calles }}</td>
+                <th>Calle</th>
+                <td>{{ disertante.direccion }}</td>
             </tr>
             <tr>
                 <th>Url</th>
@@ -50,9 +50,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_disertante_index') }}">Volver a la lista</a>
+    <a href="{{ path('admin_disertante_listar') }}">Volver a la lista</a>
 
-    <a href="{{ path('app_admin_disertante_edit', {'id': disertante.id}) }}">Editar</a>
+    <a href="{{ path('admin_disertante_editar', {'id': disertante.id}) }}">Editar</a>
 
-    {{ include('admin_disertante/_delete_form.html.twig') }}
+    {{ include('admin/disertante/_delete_form.html.twig') }}
 {% endblock %}

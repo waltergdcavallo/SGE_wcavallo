@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/admin/disertantes')]
-class AdminDisertanteController extends AbstractController
+class AdminDisertanteController extends AbstractAdminBaseController
 {
     #[Route(
         '/listar',
@@ -62,7 +62,7 @@ class AdminDisertanteController extends AbstractController
         }
 
         return $this->render(
-            'admin_disertante/nuevo.html.twig', 
+            'admin/disertante/nuevo.html.twig', 
             [
                 'form' => $form,
             ]
@@ -78,7 +78,7 @@ class AdminDisertanteController extends AbstractController
         Disertante $disertante
     ): Response
     {
-        return $this->render('admin_disertante/ver.html.twig', [
+        return $this->render('admin/disertante/disertante.html.twig', [
             'disertante' => $disertante,
         ]);
     }
@@ -106,7 +106,7 @@ class AdminDisertanteController extends AbstractController
             return $this->redirectToRoute('admin_disertante_listar');
         }
 
-        return $this->render('admin_disertante/editar.html.twig', [
+        return $this->render('admin/disertante/editar.html.twig', [
             'disertante' => $disertante,
             'form' => $form,
         ]);
