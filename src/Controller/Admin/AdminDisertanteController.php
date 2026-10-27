@@ -87,7 +87,7 @@ class AdminDisertanteController extends AbstractAdminBaseController
         '/{id}/edit', 
         name: 'admin_disertante_editar', 
         methods: ['GET', 'POST'])]
-    public function edit(
+    public function editar(
         Request $request, 
         Disertante $disertante, 
         EntityManagerInterface $entityManager
@@ -102,6 +102,11 @@ class AdminDisertanteController extends AbstractAdminBaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Disertante creado correctamente.'
+            );
 
             return $this->redirectToRoute('admin_disertante_listar');
         }
