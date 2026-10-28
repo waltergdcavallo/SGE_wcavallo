@@ -12,12 +12,16 @@ use Symfony\Component\HttpFoundation\Request;
 final class EventoController extends AbstractBaseController
 {
     #[Route('/eventos', name: 'app_eventos')]
-    public function eventos(EventoRepository $repository): Response
+    public function eventos(
+        EventoRepository $repository, 
+        EventoDisponibilidadService $disponibilidadService
+        ): Response
     {
         $eventos = $repository->findEventosAlfabeticamente();
 
         return $this->render('evento/eventos.html.twig', [
-            'eventos'=>$eventos
+            'eventos'=>$eventos,
+            'disponibilidadService'=>$disponibilidadService
         ]);
     }
 
@@ -51,22 +55,5 @@ final class EventoController extends AbstractBaseController
         return $this->render('evento/evento.html.twig', [
             'evento'=>$evento
        ]);
-    }
-
-    #[Route('/evento/{id}/disponibilidad', name: 'evento_disponibilidad')]
-    public function disponibilidad(
-        Evento $evento,
-        EventoDisponibilidadService $disponibilidadService
-    ): Response {
-        $mensaje = $disponibilidadService
-            ->obtenerMensaje($evento);
-
-        return $this->render(
-            'evento/disponibilidad.html.twig',
-            [
-                'evento' => $evento,
-                'mensaje' => $mensaje,
-            ]
-        );
     }
 }

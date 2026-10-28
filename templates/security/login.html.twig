@@ -1,0 +1,73 @@
+{% extends 'layout-admin.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block title %}Ingreso Administrador{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <h3 class="text-center mb-4">
+                        Gestión de Eventos
+                    </h3>
+
+                    <h5 class="text-center">
+                        Ingreso Administrador
+                    </h5>
+
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            Credenciales incorrectas.
+                        </div>
+                    {% endif %}
+
+                    <form method="post">
+
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="_username"
+                            value="{{ last_username }}"
+                            class="form-control mb-3"
+                            required
+                            autofocus
+                        >
+
+                        <label>Contraseña</label>
+                        <input
+                            type="password"
+                            name="_password"
+                            class="form-control mb-3"
+                            required
+                        >
+
+                        <input
+                            type="hidden"
+                            name="_csrf_token"
+                            value="{{ csrf_token('authenticate') }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100">
+                            Ingresar
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

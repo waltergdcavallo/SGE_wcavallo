@@ -14,9 +14,9 @@ class EventoDisponibilidadService
     public function obtenerMensaje(Evento $evento): string
     {
         if ($this->tieneCupos($evento)) {
-            return 'El evento tiene cupos disponibles';
+            return 'Cupos disponibles';
         }
 
-        return 'El evento está completo';
+        return 'Sin cupos';
     }
 }

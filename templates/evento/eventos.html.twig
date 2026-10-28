@@ -17,6 +17,11 @@
         </div>
 
         <div>
+            {% set cupos = disponibilidadService.obtenerMensaje(evento) %}
+            {{ cupos }}
+        </div>
+
+        <div>
             <strong>
                 {{ evento.hora|date('H:i') }}
                 -
