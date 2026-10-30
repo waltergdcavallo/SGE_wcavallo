@@ -39,6 +39,11 @@ class DefaultController extends AbstractController
 
         $eventos = array_slice($eventos, 0, 8);
 
+        foreach ($eventos as $evento){
+            $capacidad=$evento->getCapacidad()-count($evento->getUsuarios());
+            $evento->setCapacidad($capacidad);
+        }
+
         return $this->render('default/portada.html.twig', [
             'eventosCol1' => array_slice($eventos, 0, 4),
             'eventosCol2' => array_slice($eventos, 4, 4),
