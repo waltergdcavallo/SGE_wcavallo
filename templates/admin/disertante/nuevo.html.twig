@@ -3,9 +3,33 @@
 {% block title %}Nuevo Disertante{% endblock %}
 
 {% block body %}
-    <h1>Crear nuevo Disertante</h1>
+<div class="container mt-4 mb-5">
+    
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+        <div>
+            <h1 class="h3 fw-bold text-dark mb-1">
+                <i class="bi bi-person-plus text-success me-2"></i> Crear Nuevo Disertante
+            </h1>
+            <p class="text-muted mb-0">
+                Complete los datos del nuevo orador para registrarlo en el sistema.
+            </p>
+        </div>
+        <div>
+            <a href="{{ path('admin_disertante_listar') }}" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm">
+                <i class="bi bi-arrow-left me-2"></i> Volver a la lista
+            </a>
+        </div>
+    </div>
 
-    {{ include('admin/disertante/_form.html.twig') }}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
 
-    <a href="{{ path('admin_disertante_listar') }}">Volver a la lista</a>
+                {{ include('admin/disertante/_form.html.twig', {'button_label': 'Guardar Disertante'}) }}
+
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

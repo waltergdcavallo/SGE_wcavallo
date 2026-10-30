@@ -1,0 +1,94 @@
+{% extends 'admin/layout-admin.html.twig|' %}
+
+{% block title %}Detalle del Evento{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 mb-5">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+            <div>
+                <h1 class="h3 fw-bold text-dark mb-1">
+                    <i class="bi bi-person-badge text-success me-2"></i> Evento
+                </h1>
+                <p class="text-muted mb-0">
+                    Información detallada y datos del evento.
+                </p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="{{ path('admin_evento_listar') }}" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm">
+                    <i class="bi bi-arrow-left me-2"></i> Volver a la lista
+                </a>
+                <a href="{{ path('admin_evento_editar', {'id': evento.id}) }}" class="btn btn-outline-warning px-4 py-2 rounded-pill shadow-sm">
+                    <i class="bi bi-pencil me-2"></i> Editar
+                </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
+
+                    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                        <div class="flex-shrink-0 bg-success bg-opacity-10 text-success p-3 rounded-circle fs-2 me-3">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold text-dark mb-1">{{ evento.titulo }}</h3>
+                            <span class="text-muted small">
+                                <i class="bi bi-envelope me-1"></i> {{ evento.descripcion|default('Sin descripcion') }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle mb-0">
+                            <tbody>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary w-25 py-3"><i class="bi bi-hash me-2"></i> ID</th>
+                                    <td class="fw-semibold text-dark">{{ evento.id }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-file-text me-2"></i> Slug</th>
+                                    <td class="text-muted">{{ evento.slug|default('Sin slug') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-telephone me-2"></i> Fecha</th>
+                                    <td class="text-dark">{{ evento.fecha|date('d/m/Y') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-geo-alt me-2"></i> Hora</th>
+                                    <td class="text-dark">{{ evento.hora|date('d/m/Y') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-geo-alt me-2"></i> Idioma</th>
+                                    <td class="text-dark">{{ evento.idioma }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-geo-alt me-2"></i> Capacidad</th>
+                                    <td class="text-dark">{{ evento.capacidad }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-geo-alt me-2"></i> Estado</th>
+                                    <td class="text-dark">{{ evento.Estado }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr class="my-4 text-muted">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted small">
+                            <i class="bi bi-exclamation-triangle text-warning me-1"></i> Acciones críticas del evento.
+                        </span>
+                        <div>
+                            {{ include('admin/evento/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

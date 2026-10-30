@@ -97,6 +97,62 @@ class AdminEventoController extends AbstractAdminBaseController
         );
     }
 
+    #[Route('admin/evento/{id}', name: 'admin_evento_ver')]
+    public function ver(
+        Request $request,
+        EventoRepository $repository
+    ): Response
+    {
+        $id = $request->attributes->get('id');
+
+        $evento = $repository->findOneBy([
+            'id'=>$id
+        ]);
+
+        if (!$evento) {
+            throw $this->createNotFoundException(
+                'No existe el evento solicitado'
+            );
+        }
+
+        return $this->render('admin/evento/evento.html.twig', [
+            'evento'=>$evento
+       ]);
+    }
+
+    #[Route(
+        '/{id}/edit', 
+        name: 'admin_evento_editar', 
+        methods: ['GET', 'POST'])]
+    public function editar(
+        Request $request, 
+        Evento $evento, 
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $form = $this->createForm(
+            EventoType::class, 
+            $evento
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Evento editado correctamente.'
+            );
+
+            return $this->redirectToRoute('admin_evento_listar');
+        }
+
+        return $this->render('admin/evento/editar.html.twig', [
+            'evento' => $evento,
+            'form' => $form,
+        ]);
+    }
     
     #[Route(
         '/borrar/{id}',

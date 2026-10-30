@@ -1,25 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
+    <header class="sticky-top bg-white bg-opacity-75 backdrop-blur border-bottom shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light container py-2">
 
-    <h1>
-        Eventos
-    </h1>
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-primary fs-4" href="{{ path('portada') }}">
+                <i class="bi bi-calendar-event-fill"></i>
+                <span>Eventos</span>
+            </a>
 
-    <nav class="navbar mx-4">
-        <a href="{{ path('portada')}}">
-           Inicio
-        </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <a href="{{ path('app_eventos')}}">
-            Eventos
-        </a>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill text-dark fw-medium" href="{{ path('portada') }}">
+                            <i class="bi bi-house-door me-1 text-muted"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill text-dark fw-medium" href="{{ path('app_eventos') }}">
+                            <i class="bi bi-calendar3 me-1 text-muted"></i> Eventos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-pill text-dark fw-medium" href="{{ path('app_disertantes') }}">
+                            <i class="bi bi-people me-1 text-muted"></i> Disertantes
+                        </a>
+                    </li>
+                </ul>
 
-        <a href="{{ path('app_disertantes')}}">
-            Disertantes
-        </a>
-    </nav>
+                <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-semibold">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                    </a>
+                </div>
+            </div>
 
+        </nav>
+    </header>
 {% endblock %}
 
 {% block body %}

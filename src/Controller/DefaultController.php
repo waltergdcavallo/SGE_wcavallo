@@ -15,7 +15,6 @@ class DefaultController extends AbstractController
     public function __construct(
         private EntityManagerInterface $entityManager
     ){}
-
     
     #[Route(
         '/sitio/{pagina}',

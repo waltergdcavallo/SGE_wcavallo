@@ -1,34 +1,86 @@
 {% extends 'admin/layout-admin.html.twig' %}
 
-{% block title %}
-    Nuevo evento
-{% endblock %}
+{% block title %}Nuevo Evento{% endblock %}
 
 {% block body %}
-
-    <div class="container mt-4"> 
-        <h1>Nuevo evento</h1>
-
-        <p>
-            Complete los datos para registrar un nuevo evento en el sistema.
-        </p>
-        {{ form_start(form) }}
-            {{form_row(form.titulo) }}
-            {{form_row(form.descripcion) }}
-            {{form_row(form.fecha) }}
-            {{form_row(form.hora) }}
-            {{form_row(form.duracion) }}
-            {{form_row(form.idioma) }}
-            {{form_row(form.estado) }}
-            {{form_row(form.disertante) }}
-            {{form_row(form.capacidad) }}
-
-            <button
-                type="submit"
-                class="btn btn-primary"
-            >
-                Guardar evento
-            </button>
-        {{ form_end(form) }}
+<div class="container mt-4 mb-5">
+    
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+        <div>
+            <h1 class="h3 fw-bold text-dark mb-1">
+                <i class="bi bi-calendar-plus text-primary me-2"></i> Nuevo Evento
+            </h1>
+            <p class="text-muted mb-0">
+                Complete los datos para registrar un nuevo evento en el sistema.
+            </p>
+        </div>
+        <div>
+            <a href="{{ path('admin_evento_listar') }}" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm">
+                <i class="bi bi-arrow-left me-2"></i> Volver a la lista
+            </a>
+        </div>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
+                
+                {{ form_start(form) }}
+                    
+                    <div class="mb-3">
+                        {{ form_row(form.titulo) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(form.descripcion) }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.fecha) }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.hora) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            {{ form_row(form.duracion) }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form_row(form.capacidad) }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form_row(form.idioma) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.estado) }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.disertante) }}
+                        </div>
+                    </div>
+
+                    <hr class="my-4 text-muted">
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ path('admin_evento_listar') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i> Guardar evento
+                        </button>
+                    </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

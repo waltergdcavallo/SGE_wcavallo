@@ -190,6 +190,10 @@ class AppFixtures extends Fixture
                 'usuario' . $i . '@' . $emails[array_rand($emails)]
             );
 
+            $usuario->setRoles(
+                ['ROLE_USER']
+            );
+
             $passwordPlano= 'usuario' . $i;
 
             $passwordHash = $this->passwordHasher->hashPassword(
@@ -200,7 +204,92 @@ class AppFixtures extends Fixture
             $usuario->setPassword($passwordHash);
 
             $manager->persist($usuario);
+
         }
+
+        $admin = new Usuario();
+
+            $admin->setNombre(
+                'Walter'
+            );
+
+            $admin->setApellido(
+                'Cavallo'
+            );
+
+            $admin->setDni(
+                (string) rand(20000000, 45000000)
+            );
+
+            $admin->setDireccion(
+                $calles[array_rand($calles)] . ' ' . rand(100, 4000)
+            );
+
+            $admin->setTelefono(
+                '0342-' . rand(4000000, 4999999)
+            );
+
+            $admin->setEmail(
+                'admin@gmail.com'
+            );
+
+            $admin->setRoles(
+                ['ROLE_ADMIN']
+            );
+
+            $passwordPlano= 'password';
+
+            $passwordHash = $this->passwordHasher->hashPassword(
+                $admin,
+                $passwordPlano
+            );
+
+            $admin->setPassword($passwordHash);
+
+            $manager->persist($admin);
+
+
+
+            $user = new Usuario();
+
+            $user->setNombre(
+                'Walter'
+            );
+
+            $user->setApellido(
+                'Cavallo'
+            );
+
+            $user->setDni(
+                (string) rand(20000000, 45000000)
+            );
+
+            $user->setDireccion(
+                $calles[array_rand($calles)] . ' ' . rand(100, 4000)
+            );
+
+            $user->setTelefono(
+                '0342-' . rand(4000000, 4999999)
+            );
+
+            $user->setEmail(
+                'user@gmail.com'
+            );
+
+            $user->setRoles(
+                ['ROLE_USER']
+            );
+
+            $passwordPlano= 'password';
+
+            $passwordHash = $this->passwordHasher->hashPassword(
+                $user,
+                $passwordPlano
+            );
+
+            $user->setPassword($passwordHash);
+
+            $manager->persist($user);
 
         $manager->flush();
 
@@ -215,25 +304,25 @@ class AppFixtures extends Fixture
                 'titulo' => 'Introducción a Symfony 7.4',
                 'hora' => '09:00:00',
                 'disertante' => 'javierLopez',
-                'capacidad' => '20'
+                'capacidad' => '0'
             ],
             [
                 'titulo' => 'Ruteo y Controladores',
                 'hora' => '10:30:00',
                 'disertante' => 'ignacioBlanco',
-                'capacidad' => '20'
+                'capacidad' => '5'
             ],
             [
                 'titulo' => 'Doctrine ORM y Base de Datos',
                 'hora' => '12:00:00',
                 'disertante' => 'marcosRojas',
-                'capacidad' => '20'
+                'capacidad' => '100'
             ],
             [
                 'titulo' => 'Twig y Formularios',
                 'hora' => '15:00:00',
                 'disertante' => 'antonelaToledo',
-                'capacidad' => '20'
+                'capacidad' => '10'
             ],
             [
                 'titulo' => 'Seguridad en Symfony 7.4',

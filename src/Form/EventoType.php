@@ -63,12 +63,6 @@ class EventoType extends AbstractType
                 'choice_label' => 'nombre',
             ])
 
-            ->add('usuarios', EntityType::class, [
-                'class' => Usuario::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-
             ->add('capacidad', null, [
                 'label'=>'Capacidad del evento',
                 'attr'=>[

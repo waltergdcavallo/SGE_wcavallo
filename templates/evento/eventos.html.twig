@@ -1,39 +1,74 @@
 {% extends 'frontend/layout.html.twig' %}
 
-{% block title %}Eventos{% endblock %}
+{% block title %}Eventos Disponibles{% endblock %}
 
 {% block contenido %}
+        <div class="container my-5">
 
-    {% for evento in eventos %}
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+                <div>
+                    <h1 class="h3 fw-bold text-dark mb-1">
+                        <i class="bi bi-calendar3 text-primary me-2"></i> Todos los Eventos
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Explora el listado completo de actividades, verifica los horarios y consulta los cupos disponibles.
+                    </p>
+                </div>
+            </div>
 
-        <h3>{{ evento.titulo|title }}</h3>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
 
-        <div>
-            {{ evento.descripcion|slice(0,150) }}
+                {% for evento in eventos %}
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bg-white d-flex flex-column">
+
+                            <div class="card-body p-4 d-flex flex-column">
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    {% set cupos = disponibilidadService.obtenerMensaje(evento) %}
+                                    <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill small fw-semibold">
+                                        <i class="bi bi-people me-1"></i> {{ cupos }}
+                                    </span>
+
+                                    <span class="small text-muted">
+                                        <i class="bi bi-calendar-event me-1"></i> {{ evento.fecha|date('d/m/Y') }}
+                                    </span>
+                                </div>
+
+                                <h3 class="h5 fw-bold text-dark mb-2">
+                                    <a href="{{ path('evento_detalle', {'slug': evento.slug}) }}" class="text-decoration-none text-dark stretched-link">
+                                        {{ evento.titulo|title }}
+                                    </a>
+                                </h3>
+
+                                <p class="text-muted small mb-4 flex-grow-1">
+                                    {{ evento.descripcion|slice(0, 120) }}...
+                                </p>
+
+                                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                                    <span class="small fw-semibold text-secondary">
+                                        <i class="bi bi-clock me-1"></i> 
+                                        {{ evento.hora|date('H:i') }} - {{ evento.horaFinalizacion|date('H:i') }}
+                                    </span>
+                                    <i class="bi bi-arrow-right text-primary"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm rounded-4 bg-light text-center py-5">
+                            <div class="card-body text-muted py-5">
+                                <i class="bi bi-calendar-x display-4 text-secondary mb-3 d-block"></i>
+                                <h5 class="fw-semibold text-dark">No hay eventos disponibles</h5>
+                                <p class="small text-muted mb-0">Vuelve más tarde para consultar nuevas actividades programadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
         </div>
-
-        <div>
-            {{ evento.fecha|date('d/m/Y') }}
-        </div>
-
-        <div>
-            {% set cupos = disponibilidadService.obtenerMensaje(evento) %}
-            {{ cupos }}
-        </div>
-
-        <div>
-            <strong>
-                {{ evento.hora|date('H:i') }}
-                -
-                {{ evento.horaFinalizacion|date('H:i') }}
-            </strong>
-
-            <br>
-
-            {% include 'evento/_card.html.twig'%}
-
-        </div>
-
-    {% endfor %}
-    
 {% endblock %}

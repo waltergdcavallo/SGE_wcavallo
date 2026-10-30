@@ -1,8 +1,6 @@
-{% extends 'layout-admin.html.twig' %}
+{% extends 'frontend/layout.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
-{% block title %}Ingreso Administrador{% endblock %}
+{% block title %}Ingreso al sistema{% endblock %}
 
 {% block body %}
 
@@ -19,12 +17,12 @@
                     </h3>
 
                     <h5 class="text-center">
-                        Ingreso Administrador
+                        Ingreso Usuario
                     </h5>
 
                     {% if error %}
                         <div class="alert alert-danger">
-                            Credenciales incorrectas.
+                            Datos incorrectos.
                         </div>
                     {% endif %}
 

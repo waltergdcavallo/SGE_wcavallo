@@ -1,92 +1,116 @@
 {% extends 'admin/layout-admin.html.twig' %}
 
-{% block title %}Lista de Disertante{% endblock %}
+{% block title %}Lista de Disertantes{% endblock %}
 
 {% block body %}
-
-    <div class="container mt-4">
-
-        <h1>
-            Gestión de Disertantes
-        </h1>
+<div class="container mt-4 mb-5">
+    
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+        <div>
+            <h1 class="h3 fw-bold text-dark mb-1">
+                <i class="bi bi-people text-success me-2"></i> Gestión de Disertantes
+            </h1>
+            <p class="text-muted mb-0">
+                Administra el listado de oradores, sus datos de contacto y perfiles profesionales.
+            </p>
+        </div>
+        <div>
+            <a href="{{ path('admin_disertante_nuevo') }}" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
+                <i class="bi bi-person-plus me-2"></i> Nuevo Disertante
+            </a>
+        </div>
+    </div>
 
     {% block messages %}
         {{ parent() }}
     {% endblock %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Biografia</th>
-                <th>Telefono</th>
-                <th>Calles</th>
-                <th>Url</th>
-                <th>Email</th>
-                <th>Twitter</th>
-                <th>Linkedin</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for disertante in disertantes %}
-            <tr>
-                <td>
-                    {{ disertante.id }}
-                </td>
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light text-uppercase fs-7 text-secondary fw-bold">
+                        <tr>
+                            <th class="ps-4">#</th>
+                            <th>Disertante</th>
+                            <th>Contacto</th>
+                            <th>Dirección</th>
+                            <th>Redes</th>
+                            <th class="text-end pe-4">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for disertante in disertantes %}
+                            <tr>
+                                <td class="ps-4 text-muted fw-semibold">
+                                    {{ disertante.id }}
+                                </td>
 
-                <td>
-                    {{ disertante.nombre }}
-                </td>
+                                <td>
+                                    <div class="fw-bold text-dark">
+                                        {{ disertante.nombre }} {{ disertante.apellido }}
+                                    </div>
+                                    <small class="text-muted text-truncate d-inline-block" style="max-width: 200px;">
+                                        {{ disertante.biografia|default('Sin biografía') }}
+                                    </small>
+                                </td>
 
-                <td>
-                    {{ disertante.apellido }}
-                </td>
+                                <td>
+                                    <div class="small text-dark">
+                                        <i class="bi bi-envelope text-muted me-1"></i> {{ disertante.email|default('No especificado') }}
+                                    </div>
+                                    <small class="text-muted">
+                                        <i class="bi bi-telephone text-muted me-1"></i> {{ disertante.telefono|default('Sin teléfono') }}
+                                    </small>
+                                </td>
 
-                <td>
-                    {{ disertante.biografia }}
-                </td>
+                                <td>
+                                    <span class="small text-muted">
+                                        <i class="bi bi-geo-alt text-muted me-1"></i> {{ disertante.direccion|default('-') }}
+                                    </span>
+                                </td>
 
-                <td>
-                    {{ disertante.telefono }}
-                </td>
+                                <td>
+                                    Twitter: {{ disertante.twitter ?? 'Vacío' }} <br>
+                                    LinkedIn: {{ disertante.linkedin ?? 'Vacío' }} <br>
+                                    Web: {{ disertante.url ?? 'Vacío' }}
+                                </td>
 
-                <td>
-                    {{ disertante.direccion }}
-                </td>
+                                <td class="text-end pe-4">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a href="{{ path('admin_disertante_ver', {'id': disertante.id}) }}" 
+                                           class="btn btn-outline-info btn-sm rounded-pill px-3" 
+                                           title="Ver detalles">
+                                            <i class="bi bi-eye me-1"></i> Ver
+                                        </a>
 
-                <td>
-                    {{ disertante.url }}
-                </td>
+                                        <a href="{{ path('admin_disertante_editar', {'id': disertante.id}) }}" 
+                                           class="btn btn-outline-warning btn-sm rounded-pill px-3" 
+                                           title="Editar">
+                                            <i class="bi bi-pencil me-1"></i> Editar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center py-5">
+                                    <div class="text-muted py-4">
+                                        <i class="bi bi-person-x display-4 text-secondary mb-3 d-block"></i>
+                                        <h5 class="fw-semibold text-dark">No hay disertantes registrados</h5>
+                                        <p class="small text-muted mb-3">Comienza agregando tu primer disertante a la plataforma.</p>
+                                        <a href="{{ path('admin_disertante_nuevo') }}" class="btn btn-success btn-sm rounded-pill px-4">
+                                            Crear nuevo disertante
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-                <td>
-                    {{ disertante.email }}
-                </td>
-
-                <td>
-                    {{ disertante.twitter }}
-                </td>
-
-                <td>
-                    {{ disertante.linkedin }}
-                </td>
-
-                <td>
-                    <a href="{{ path('admin_disertante_ver', {'id': disertante.id}) }}" class="btn btn-info btn-sm">Ver</a>
-                    <a href="{{ path('admin_disertante_editar', {'id': disertante.id}) }}">Editar</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">
-                    No hay disertantes
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_disertante_nuevo') }}" class="btn btn-success">Nuevo disertante</a>
+</div>
 {% endblock %}

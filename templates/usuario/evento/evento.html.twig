@@ -1,0 +1,94 @@
+{% extends 'usuario/layout-usuario.html.twig' %}
+
+{% block title %}Detalle del Evento{% endblock %}
+
+{% block body %}
+    <div class="container mt-4 mb-5">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+            <div>
+                <h1 class="h3 fw-bold text-dark mb-1">
+                    <i class="bi bi-calendar-event text-primary me-2"></i> Detalle del Evento
+                </h1>
+                <p class="text-muted mb-0">
+                    Información detallada y datos del evento administrativo.
+                </p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="{{ path('usuario_evento_listar') }}" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm">
+                    <i class="bi bi-arrow-left me-2"></i> Volver a la lista
+                </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
+
+                    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                        <div class="flex-shrink-0 bg-primary bg-opacity-10 text-primary p-3 rounded-circle fs-2 me-3">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold text-dark mb-1">{{ evento.titulo }}</h3>
+                            <span class="text-muted small">
+                                <i class="bi bi-text-paragraph me-1"></i> {{ evento.descripcion|default('Sin descripción') }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle mb-0">
+                            <tbody>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary w-25 py-3"><i class="bi bi-hash me-2"></i> ID</th>
+                                    <td class="fw-semibold text-dark">{{ evento.id }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-file-text me-2"></i> Slug</th>
+                                    <td class="text-muted">{{ evento.slug|default('Sin slug') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-calendar-date me-2"></i> Fecha</th>
+                                    <td class="text-dark">{{ evento.fecha|date('d/m/Y') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-clock me-2"></i> Horario</th>
+                                    <td class="text-dark">
+                                        {{ evento.hora|date('H:i') }}
+                                        {% if evento.horaFinalizacion %}
+                                            - {{ evento.horaFinalizacion|date('H:i') }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-translate me-2"></i> Idioma</th>
+                                    <td class="text-dark">
+                                        <span class="badge bg-light text-dark border px-2 py-1">{{ evento.idioma }}</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-people me-2"></i> Capacidad</th>
+                                    <td class="text-dark">{{ evento.capacidad }} personas</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-person-badge me-2"></i> Disertante</th>
+                                    <td class="text-dark">{{ evento.disertante ?? 'A confirmar' }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-check-circle me-2"></i> Estado</th>
+                                    <td>
+                                        <span class="badge bg-success bg-opacity-15 px-3 py-2 rounded-pill">
+                                            {{ evento.estado }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

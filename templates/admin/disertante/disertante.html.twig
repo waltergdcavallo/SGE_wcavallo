@@ -1,58 +1,118 @@
 {% extends 'admin/layout-admin.html.twig' %}
 
-{% block title %}Disertante{% endblock %}
+{% block title %}Detalle del Disertante{% endblock %}
 
 {% block body %}
-    <h1>Disertante</h1>
+    <div class="container mt-4 mb-5">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ disertante.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ disertante.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Apellido</th>
-                <td>{{ disertante.apellido }}</td>
-            </tr>
-            <tr>
-                <th>Biografia</th>
-                <td>{{ disertante.biografia }}</td>
-            </tr>
-            <tr>
-                <th>Telefono</th>
-                <td>{{ disertante.telefono }}</td>
-            </tr>
-            <tr>
-                <th>Calle</th>
-                <td>{{ disertante.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Url</th>
-                <td>{{ disertante.url }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ disertante.email }}</td>
-            </tr>
-            <tr>
-                <th>Twitter</th>
-                <td>{{ disertante.twitter }}</td>
-            </tr>
-            <tr>
-                <th>Linkedin</th>
-                <td>{{ disertante.linkedin }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+            <div>
+                <h1 class="h3 fw-bold text-dark mb-1">
+                    <i class="bi bi-person-badge text-success me-2"></i> Perfil del Disertante
+                </h1>
+                <p class="text-muted mb-0">
+                    Información detallada y datos de contacto registrados en el sistema.
+                </p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="{{ path('admin_disertante_listar') }}" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm">
+                    <i class="bi bi-arrow-left me-2"></i> Volver a la lista
+                </a>
+                <a href="{{ path('admin_disertante_editar', {'id': disertante.id}) }}" class="btn btn-outline-warning px-4 py-2 rounded-pill shadow-sm">
+                    <i class="bi bi-pencil me-2"></i> Editar
+                </a>
+            </div>
+        </div>
 
-    <a href="{{ path('admin_disertante_listar') }}">Volver a la lista</a>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
 
-    <a href="{{ path('admin_disertante_editar', {'id': disertante.id}) }}">Editar</a>
+                    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                        <div class="flex-shrink-0 bg-success bg-opacity-10 text-success p-3 rounded-circle fs-2 me-3">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold text-dark mb-1">{{ disertante.nombre }} {{ disertante.apellido }}</h3>
+                            <span class="text-muted small">
+                                <i class="bi bi-envelope me-1"></i> {{ disertante.email|default('Sin correo electrónico') }}
+                            </span>
+                        </div>
+                    </div>
 
-    {{ include('admin/disertante/_delete_form.html.twig') }}
+                    <div class="table-responsive">
+                        <table class="table table-borderless align-middle mb-0">
+                            <tbody>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary w-25 py-3"><i class="bi bi-hash me-2"></i> ID</th>
+                                    <td class="fw-semibold text-dark">{{ disertante.id }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-file-text me-2"></i> Biografía</th>
+                                    <td class="text-muted">{{ disertante.biografia|default('No especificada') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-telephone me-2"></i> Teléfono</th>
+                                    <td class="text-dark">{{ disertante.telefono|default('No registrado') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-geo-alt me-2"></i> Dirección</th>
+                                    <td class="text-dark">{{ disertante.direccion|default('No registrada') }}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-globe me-2"></i> Sitio Web</th>
+                                    <td>
+                                        {% if disertante.url %}
+                                            <a href="{{ disertante.url }}" target="_blank" class="text-decoration-none">
+                                                {{ disertante.url }} <i class="bi bi-box-arrow-up-right small"></i>
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">No especificada</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                    <th class="text-secondary py-3"><i class="bi bi-twitter-x me-2"></i> Twitter</th>
+                                    <td>
+                                        {% if disertante.twitter %}
+                                            <a href="{{ disertante.twitter }}" target="_blank" class="text-decoration-none">
+                                                {{ disertante.twitter }} <i class="bi bi-box-arrow-up-right small"></i>
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">No especificado</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="text-secondary pt-3"><i class="bi bi-linkedin me-2"></i> LinkedIn</th>
+                                    <td class="pt-3">
+                                        {% if disertante.linkedin %}
+                                            <a href="{{ disertante.linkedin }}" target="_blank" class="text-decoration-none">
+                                                {{ disertante.linkedin }} <i class="bi bi-box-arrow-up-right small"></i>
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">No especificado</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr class="my-4 text-muted">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted small">
+                            <i class="bi bi-exclamation-triangle text-warning me-1"></i> Acciones críticas del registro.
+                        </span>
+                        <div>
+                            {{ include('admin/disertante/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}

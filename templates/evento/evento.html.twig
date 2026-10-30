@@ -1,38 +1,102 @@
 {% extends 'frontend/layout.html.twig' %}
 
+{% block title %}{{ evento.titulo }}{% endblock %}
+
 {% block body %}
-
-    <h1>
-        {{ evento.titulo }}
-    </h1>
-
-    <p>
-        {{ evento.descripcion }}
-    </p>
-
-    <div>
-        <strong>Fecha:</strong>
-        {{ evento.fecha|date('d/m/Y') }}
-    </div>
-
-    <div>
-        <strong>Hora:</strong>
-        {{ evento.hora|date('H:i') }}
-        -
-        {{ evento.horaFinalizacion|date('H:i')}} 
-    </div>
-
-    <div>
-        <strong>Idioma:</strong>
-        {{ evento.idioma }}
-    </div>
-
-    <div>
-        <strong>Disertante:</strong>
-        <a href="{{ path('app_disertantes') }}">
-        {{ evento.disertante }}
+<div class="container my-5">
+    
+    <div class="mb-4">
+        <a href="{{ path('portada') }}" class="btn btn-outline-secondary btn-sm rounded-pill px-3 shadow-sm">
+            <i class="bi bi-arrow-left me-1"></i> Volver al inicio
         </a>
-
     </div>
 
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+                
+                <div class="card-body p-4 p-md-5">
+                    
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-semibold">
+                            <i class="bi bi-translate me-1"></i> {{ evento.idioma }}
+                        </span>
+                        {% if evento.estado %}
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill fw-semibold">
+                                <i class="bi bi-check-circle me-1"></i> Disponible
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <h1 class="display-5 fw-bold text-dark mb-4">
+                        {{ evento.titulo }}
+                    </h1>
+
+                    <div class="row g-4 py-3 my-3 border-top border-bottom bg-light rounded-3 px-3">
+                        
+                        <div class="col-md-4 d-flex align-items-center gap-3">
+                            <div class="bg-white p-3 rounded-circle shadow-sm text-primary fs-4">
+                                <i class="bi bi-calendar-event"></i>
+                            </div>
+                            <div>
+                                <span class="d-block text-muted small text-uppercase fw-bold">Fecha</span>
+                                <span class="fw-semibold text-dark">{{ evento.fecha|date('d/m/Y') }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 d-flex align-items-center gap-3">
+                            <div class="bg-white p-3 rounded-circle shadow-sm text-primary fs-4">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div>
+                                <span class="d-block text-muted small text-uppercase fw-bold">Horario</span>
+                                <span class="fw-semibold text-dark">
+                                    {{ evento.hora|date('H:i') }}
+                                    {% if evento.horaFinalizacion %}
+                                        - {{ evento.horaFinalizacion|date('H:i') }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 d-flex align-items-center gap-3">
+                            <div class="bg-white p-3 rounded-circle shadow-sm text-primary fs-4">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+                            <div>
+                                <span class="d-block text-muted small text-uppercase fw-bold">Disertante</span>
+                                {% if evento.disertante %}
+                                    <a href="{{ path('app_disertantes') }}" class="fw-semibold text-decoration-none text-primary">
+                                        {{ evento.disertante }}
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">A confirmar</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                        <h4 class="fw-bold text-dark mb-3">Sobre este evento</h4>
+                        <p class="text-muted fs-6 lh-lg">
+                            {{ evento.descripcion|nl2br }}
+                        </p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <span class="text-muted small">
+                            <i class="bi bi-info-circle me-1"></i> Inicia sesión para registrarte en el evento.
+                        </span>
+                        <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Inscribirme al evento
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

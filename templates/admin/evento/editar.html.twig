@@ -1,0 +1,50 @@
+{% extends 'admin/layout-admin.html.twig' %}
+
+{% block title %}Editar Evento{% endblock %}
+
+{% block body %}
+<div class="container mt-4 mb-5">
+    
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom gap-3">
+        <div>
+            <h1 class="h3 fw-bold text-dark mb-1">
+                <i class="bi bi-person-gear text-primary me-2"></i> Editar Evento
+            </h1>
+            <p class="text-muted mb-0">
+                Modifica los datos del evento y guarda los cambios realizados.
+            </p>
+        </div>
+        <div>
+            <a href="{{ path('admin_evento_listar') }}" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm">
+                <i class="bi bi-arrow-left me-2"></i> Volver a la lista
+            </a>
+        </div>
+    </div>
+
+    {% block messages %}
+        {{ parent() }}
+    {% endblock %}
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 bg-white p-4 p-md-5">
+                
+                {{ include('admin/evento/_form.html.twig', {'button_label': 'Actualizar Evento'}) }}
+
+                <hr class="my-4 text-muted">
+
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <span class="text-muted small">
+                        <i class="bi bi-exclamation-triangle text-warning me-1"></i> Zona de peligro: esta acción no se puede deshacer.
+                    </span>
+                    <div>
+                        {{ include('admin/evento/_delete_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

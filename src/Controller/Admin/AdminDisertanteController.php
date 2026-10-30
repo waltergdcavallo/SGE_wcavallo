@@ -105,7 +105,7 @@ class AdminDisertanteController extends AbstractAdminBaseController
 
             $this->addFlash(
                 'success',
-                'Disertante creado correctamente.'
+                'Disertante editado correctamente.'
             );
 
             return $this->redirectToRoute('admin_disertante_listar');

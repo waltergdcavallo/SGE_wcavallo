@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('admin_evento_borrar', {'id': evento.id}) }}" onsubmit="return confirm('¿Estás seguro de eliminar este Evento?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evento.id) }}">
+    
+    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 shadow-sm">
+        <i class="bi bi-trash me-1"></i> Borrar
+    </button>
+</form>
