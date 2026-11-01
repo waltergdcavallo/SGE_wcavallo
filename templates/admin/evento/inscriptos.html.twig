@@ -37,6 +37,10 @@
                 </div>
             </div>
         </div>
+
+        {% block messages %}
+            {{ parent() }}
+        {% endblock %}
     
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
             <div class="card-body p-0">
@@ -49,6 +53,7 @@
                                 <th>Nombre y Apellido</th>
                                 <th>Teléfono</th>
                                 <th class="pe-4">Correo Electrónico</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,6 +85,14 @@
                                         <span class="text-muted small">
                                             <i class="bi bi-envelope text-muted me-1"></i> {{ usuario.email }}
                                         </span>
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ path('admin_remover_usuario', { 'eventoId': evento.id, 'usuarioId': usuario.id }) }}" 
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('¿Estás seguro de desinscribir a este usuario?');">
+                                            Quitar
+                                        </a>
                                     </td>
                                 </tr>
                             {% else %}

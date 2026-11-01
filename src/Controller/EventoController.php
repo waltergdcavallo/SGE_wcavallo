@@ -8,19 +8,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\EventoRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 final class EventoController extends AbstractBaseController
 {
     #[Route('/eventos', name: 'app_eventos')]
     public function eventos(
-        EventoRepository $repository, 
-        EventoDisponibilidadService $disponibilidadService
+        EventoRepository $eventoRepository, 
+        EventoDisponibilidadService $disponibilidadService,
+        PaginatorInterface $paginator,
+        Request $request
         ): Response
     {
-        $eventos = $repository->findEventosAlfabeticamente();
+        $query = $eventoRepository->findEventosAlfabeticamente();
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('evento/eventos.html.twig', [
-            'eventos'=>$eventos,
+            'pagination' => $pagination,
             'disponibilidadService'=>$disponibilidadService
         ]);
     }
@@ -29,12 +38,12 @@ final class EventoController extends AbstractBaseController
     #[Route('/evento/{slug}', name: 'evento_detalle')]
     public function evento(
         Request $request,
-        EventoRepository $repository
+        EventoRepository $eventoRepository
     ): Response
     {
         $slug = $request->attributes->get('slug');
 
-        $evento = $repository->findOneBy([
+        $evento = $eventoRepository->findOneBy([
             'slug'=>$slug
         ]);
 

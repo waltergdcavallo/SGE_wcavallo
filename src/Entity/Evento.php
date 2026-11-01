@@ -39,7 +39,7 @@ class Evento
     private ?string $idioma = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventos')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Disertante $disertante = null;
 
     /**

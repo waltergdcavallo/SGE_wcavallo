@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class EventoType extends AbstractType
 {
@@ -51,8 +52,13 @@ class EventoType extends AbstractType
                 ],
             ])
 
-            ->add('estado', null, [
+            ->add('estado', ChoiceType::class, [
                 'label'=>'Estado del evento',
+                'choices' => [
+                    'Activo'=>'Activo',
+                    'Finalizado'=> 'Finalizado',
+                    'Pendiente'=> 'Pendiente',
+                ],
                 'attr'=>[
                     'placeholder'=>'Ingrese el estado del evento',
                 ],
@@ -61,6 +67,8 @@ class EventoType extends AbstractType
             ->add('disertante', EntityType::class, [
                 'class' => Disertante::class,
                 'choice_label' => 'nombre',
+                'required' => false,
+                'placeholder' => 'Sin disertante',
             ])
 
             ->add('capacidad', null, [

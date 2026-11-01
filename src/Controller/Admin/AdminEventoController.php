@@ -10,23 +10,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\UsuarioRepository;
 
 #[Route('/admin/eventos')]
 class AdminEventoController extends AbstractAdminBaseController
 {
-    #[Route(
-        '/listar',
-        name: 'admin_evento_listar'
-    )]
+    #[Route('/listar',name: 'admin_evento_listar')]
     public function listar(
-        EventoRepository $eventoRepository
+        EventoRepository $eventoRepository,
+        PaginatorInterface $paginator,
+        Request $request
     ): Response
     {
+        $query = $eventoRepository->findEventosAlfabeticamente();
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render(
             'admin/evento/listar.html.twig',
             [
-                'eventos' => $eventoRepository->findEventosAlfabeticamente(),
+                'pagination' => $pagination,
             ]
         );
     }
@@ -186,6 +194,45 @@ class AdminEventoController extends AbstractAdminBaseController
 
         return $this->redirectToRoute(
             'admin_evento_listar'
+        );
+    }
+
+    #[Route(
+        '/evento/{eventoId}/usuario/{usuarioId}/borrar',
+        name: 'admin_remover_usuario',
+        requirements: ['eventoId' => '\d+', 'usuarioId' => '\d+']
+    )]
+    public function removerUsuario(
+        int $eventoId,
+        int $usuarioId,
+        EventoRepository $eventoRepository,
+        UsuarioRepository $usuarioRepository,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        $evento = $eventoRepository->find($eventoId);
+        $usuario = $usuarioRepository->find($usuarioId);
+
+        if (!$evento || !$usuario) {
+            throw $this->createNotFoundException(
+                'No se encontró el evento o el usuario solicitado.'
+            );
+        }
+
+        $evento->removeUsuario($usuario);
+
+        $entityManager->flush();
+
+        $this->addSuccessMessage(
+            sprintf(
+                "El usuario '%s' ha sido desinscripto correctamente.",
+                $usuario->getEmail()
+            )
+        );
+
+        return $this->redirectToRoute(
+            'admin_evento_inscriptos',
+            ['id' => $evento->getId()]
         );
     }
 }

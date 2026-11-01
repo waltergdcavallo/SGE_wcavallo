@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Evento;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<Evento>
@@ -16,12 +17,11 @@ class EventoRepository extends ServiceEntityRepository
         parent::__construct($registry, Evento::class);
     }
 
-    public function findEventosAlfabeticamente():array
+    public function findEventosAlfabeticamente(): Query
     {
         return $this->createQueryBuilder('e')
         ->orderBy('e.titulo', 'ASC')
-        ->getQuery()
-        ->getResult();
+        ->getQuery();
     }
 
     //    /**

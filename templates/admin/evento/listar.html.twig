@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for evento in eventos %}
+                        {% for evento in pagination %}
                             <tr>
                                 <td class="ps-4">
                                     <div class="fw-semibold text-dark">
@@ -114,6 +114,11 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center mt-4">
+                    <div class="bg-white px-4 py-2 rounded-pill shadow-sm border">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
